@@ -4,17 +4,18 @@ import {InMemoryTransactionRepository} from "../../src/inMemoryTransactionReposi
 let repository;
 
 describe('inMemory transaction repository', behavesLikeATransactionRepository({
-    init() {
-        repository = new InMemoryTransactionRepository();
-    },
-    clean() {},
-    getInstance() {
-        return repository;
-    },
-    readTransactions() {
-        return repository.getAll();
-    },
-    writeTransactions(transactions) {
-        transactions.forEach(t => repository.save(t));
-    }
+  init() {
+    repository = new InMemoryTransactionRepository();
+  },
+  clean() {
+  },
+  getInstance() {
+    return repository;
+  },
+  readTransactions() {
+    return repository.getAll();
+  },
+  writeTransactions(transactions) {
+    transactions.forEach(t => repository.save(t));
+  }
 }));

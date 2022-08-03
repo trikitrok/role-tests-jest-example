@@ -1,13 +1,13 @@
 export class InMemoryTransactionRepository {
-    constructor() {
-        this._transactions = [];
-    }
+  constructor() {
+    this._transactions = [];
+  }
 
-    getAll() {
-        return this._transactions;
-    }
+  getAll() {
+    return this._transactions;
+  }
 
-    save(transaction) {
-        this._transactions.push(transaction);
-    }
+  save(transaction) {
+    this._transactions.push(transaction);
+  }
 }
