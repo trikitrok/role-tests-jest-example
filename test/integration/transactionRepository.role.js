@@ -1,15 +1,15 @@
 import {aDeposit, aWithdrawal, date} from "../helpers";
 
-export function behavesLikeATransactionRepository(environment) {
+export function behavesLikeATransactionRepository(testContext) {
   return () => describe('behaves like a transaction repository', () => {
     let repository;
     beforeEach(() => {
-      environment.init();
-      repository = environment.getInstance();
+      testContext.init();
+      repository = testContext.getInstance();
     });
 
     afterEach(() => {
-      environment.clean();
+      testContext.clean();
     });
 
     test('should save a transaction', () => {
@@ -17,17 +17,17 @@ export function behavesLikeATransactionRepository(environment) {
 
       repository.save(transaction);
 
-      expect(environment.readTransactions()).toStrictEqual([transaction]);
+      expect(testContext.readTransactions()).toStrictEqual([transaction]);
     });
 
     test('should add a transaction', () => {
       const transaction = aDeposit(100, date(2022, 6, 8));
-      environment.writeTransactions([transaction]);
+      testContext.writeTransactions([transaction]);
       const newTransaction = aDeposit(200, date(2022, 6, 9));
 
       repository.save(newTransaction);
 
-      expect(environment.readTransactions()).toStrictEqual([transaction, newTransaction]);
+      expect(testContext.readTransactions()).toStrictEqual([transaction, newTransaction]);
     });
 
     test('should get empty list of transactions if none saved', () => {
@@ -41,7 +41,7 @@ export function behavesLikeATransactionRepository(environment) {
         aDeposit(100, date(2022, 6, 8)),
         aWithdrawal(200, date(2022, 6, 9))
       ];
-      environment.writeTransactions(transactions);
+      testContext.writeTransactions(transactions);
 
       const retrievedTransactions = repository.getAll();
 
